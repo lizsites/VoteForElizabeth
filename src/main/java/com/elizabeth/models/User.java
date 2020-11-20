@@ -1,5 +1,6 @@
 package com.elizabeth.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,13 +27,24 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
+	@Column(unique = true)
 	private String email;
+	private boolean receivesNotifications;
 	
-	public User(String firstName, String lastName, String phoneNumber, String email) {
+	public User(String firstName, String lastName, String phoneNumber, String email, boolean receivesNotifications) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-
+		this.receivesNotifications = receivesNotifications;
+	}
+	
+	public User(int id, String firstName, String lastName, String phoneNumber, String email, boolean receivesNotifications) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.receivesNotifications = receivesNotifications;
 	}
 }

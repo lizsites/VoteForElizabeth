@@ -1,5 +1,6 @@
 package com.elizabeth.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class UserService {
 		userRepo.save(u);
 		return userRepo.findById(u.getId());
 		
+	}
+	
+	public List<User> getUsers(){
+		return userRepo.findAll();
+	}
+	
+	public List<User> getEmailUsers(){
+		return userRepo.findAllByReceivesNotifications(true);
 	}
 	
 }

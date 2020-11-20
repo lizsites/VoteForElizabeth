@@ -1,5 +1,6 @@
 package com.elizabeth.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import com.elizabeth.services.UserService;
 
 
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping
 @CrossOrigin(value="*", allowedHeaders="*")
 public class UserController {
 	
@@ -36,7 +38,7 @@ public class UserController {
 		this.sess = sess;
 	}
 	
-	@PostMapping
+	@PostMapping(value="/new-user")
 	public ResponseEntity<User> addUser(@RequestBody User u) {
 		System.out.println("I'm here");
 		userLog.info("New user signed up : " + u);
@@ -47,5 +49,21 @@ public class UserController {
 		else {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
+	}
+	/*
+	 * For the Get methods, do we need to check if the user list is null?
+	 * Likely the list will be null, and still functioning properly.
+	 * Therefore, at this time, I've decided that it doesn't require any control flow,
+	 * and sends whatever the repository sends back.
+	 * */
+	@GetMapping(value="/users")
+	public ResponseEntity<List<User>> getAllUsers(){
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers());
+	}
+	
+	@GetMapping(value="/notified-users")
+	public ResponseEntity<List<User>> getAllNotifiedUsers(){
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getEmailUsers());
+		
 	}
 }
