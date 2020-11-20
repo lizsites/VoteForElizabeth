@@ -1,4 +1,4 @@
-package com.revature.controllers;
+package com.elizabeth.controllers;
 
 import java.util.Optional;
 
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elizabeth.models.User;
-import com.revature.services.UserService;
+import com.elizabeth.services.UserService;
+
+
 
 @RestController
 @RequestMapping(value="/user")
 @CrossOrigin(value="*", allowedHeaders="*")
-@ResponseBody
 public class UserController {
 	
 	private static Logger userLog = LogManager.getLogger(UserController.class);
